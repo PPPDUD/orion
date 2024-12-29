@@ -119,6 +119,27 @@
 				"type": "error"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "remainingCooldown",
+						"type": "uint256"
+					}
+				],
+				"name": "TransactionCooldownNotComplete",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "TransferAmountExceedsLimit",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "TransferToContractOrNonExistentAccount",
+				"type": "error"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -190,6 +211,32 @@
 			{
 				"inputs": [],
 				"name": "MAX_SUPPLY",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "MAX_TRANSFER_AMOUNT",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "TRANSACTION_COOLDOWN",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -275,6 +322,25 @@
 						"internalType": "uint8",
 						"name": "",
 						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "lastTransactionTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -584,12 +650,20 @@
 				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
 			]
 		},
-		"contracts/MyToken.sol": {
-			"keccak256": "0x0f272a0a7076a3ab0bb12f47288b5a0ae3557a4c16a63875f1ec058ff293bf2a",
+		"@openzeppelin/contracts/utils/math/SafeMath.sol": {
+			"keccak256": "0x58b21219689909c4f8339af00813760337f7e2e7f169a97fe49e2896dcfb3b9a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://faff840f5de346b3551c99439788b93d0562e9b9ac871fd6d2de12385efc0635",
-				"dweb:/ipfs/QmamJZUUJvy1UuzLmumTJJ7fW5zEsaHqVpDvZzRzYWdhSz"
+				"bzz-raw://ef8e012e946dec20e59f2d4446f4b44bb098f3fa8bac103b1b5112fff777447b",
+				"dweb:/ipfs/QmVTooKWcLkJ9W68yNX4MgdrbAKiAXwuRN9A7f4NkdcdtQ"
+			]
+		},
+		"contracts/MyToken.sol": {
+			"keccak256": "0xaeb375406a9c557b9f417ccd72c4cf6546bdc0d993e3a960ea31992f31f1f538",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://aaf4f4a1c25c98f9542c76a7ff7f025ffa63c7590193e538cc22bbb1c057c14d",
+				"dweb:/ipfs/QmU3aYBPqFZv8LYgoEpsETdE4K944B1S68RAyYu58FWtb3"
 			]
 		}
 	},
