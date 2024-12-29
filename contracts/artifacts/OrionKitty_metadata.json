@@ -131,11 +131,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "TransferAmountExceedsLimit",
-				"type": "error"
-			},
-			{
-				"inputs": [],
 				"name": "TransferToContractOrNonExistentAccount",
 				"type": "error"
 			},
@@ -211,19 +206,6 @@
 			{
 				"inputs": [],
 				"name": "MAX_SUPPLY",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "MAX_TRANSFER_AMOUNT",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -659,11 +641,11 @@
 			]
 		},
 		"contracts/MyToken.sol": {
-			"keccak256": "0xaeb375406a9c557b9f417ccd72c4cf6546bdc0d993e3a960ea31992f31f1f538",
+			"keccak256": "0x926c4119ae1eaf84654d6a462cccabf40a3e66e3c1a3b944d27b3593acca6a05",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://aaf4f4a1c25c98f9542c76a7ff7f025ffa63c7590193e538cc22bbb1c057c14d",
-				"dweb:/ipfs/QmU3aYBPqFZv8LYgoEpsETdE4K944B1S68RAyYu58FWtb3"
+				"bzz-raw://b20199afb2971ba802cedae7b669c1c040209870a5f9368ba05c7131d592778c",
+				"dweb:/ipfs/QmVTWQkiYeNANMQnt1con1qQpams9pqLn6kvSCGGHp7Rcz"
 			]
 		}
 	},
