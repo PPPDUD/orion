@@ -9,36 +9,25 @@ contract OrionKitty is ERC20, Ownable {
     using SafeMath for uint256;
 
     uint256 public constant MAX_SUPPLY = 1000000 * 10**18;
-    uint256 public constant MAX_TRANSFER_AMOUNT = 1000 * 10**18;
     mapping(address => uint256) public lastTransactionTime;
     uint256 public constant TRANSACTION_COOLDOWN = 15;
 
     error TransactionCooldownNotComplete(uint256 remainingCooldown);
-    error TransferAmountExceedsLimit();
     error TransferToContractOrNonExistentAccount();
 
-    constructor() ERC20("Orion Kitty", "OKTY") Ownable(msg.sender) {
+    constructor() ERC20("Orion Kitty", "ORKY") Ownable(msg.sender) {
         _mint(msg.sender, MAX_SUPPLY);
     }
 
-    function _isContract(address account) internal view returns (bool) {
+    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {
+        require(to != address(0), "ERC20: transfer to the zero address");
+
         uint256 size;
-        assembly { size := extcodesize(account) }
-        return size > 0;
+        assembly { size := extcodesize(to) }
+        if (size != 0) revert TransferToContractOrNonExistentAccount();
     }
 
-    modifier checkTransferLimit(address sender, uint256 amount) {
-        if (amount > MAX_TRANSFER_AMOUNT) {
-            revert TransferAmountExceedsLimit();
-        }
-        _;
-    }
-
-    function transfer(address recipient, uint256 amount) public override checkTransferLimit(_msgSender(), amount) returns (bool) {
-        if (_isContract(recipient)) {
-            revert TransferToContractOrNonExistentAccount();
-        }
-
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
         if (msg.sender != owner()) {
             uint256 timeElapsed = block.timestamp.sub(lastTransactionTime[msg.sender]);
             if (timeElapsed < TRANSACTION_COOLDOWN) {
@@ -47,15 +36,12 @@ contract OrionKitty is ERC20, Ownable {
             }
             lastTransactionTime[msg.sender] = block.timestamp;
         }
-        super.transfer(recipient, amount);
+
+        _transfer(_msgSender(), recipient, amount);
         return true;
     }
 
-    function transferFrom(address sender, address recipient, uint256 amount) public override checkTransferLimit(sender, amount) returns (bool) {
-        if (_isContract(recipient)) {
-            revert TransferToContractOrNonExistentAccount();
-        }
-
+    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {
         if (sender != owner()) {
             uint256 timeElapsed = block.timestamp.sub(lastTransactionTime[sender]);
             if (timeElapsed < TRANSACTION_COOLDOWN) {
@@ -64,7 +50,9 @@ contract OrionKitty is ERC20, Ownable {
             }
             lastTransactionTime[sender] = block.timestamp;
         }
-        super.transferFrom(sender, recipient, amount);
+
+        _spendAllowance(sender, _msgSender(), amount);
+        _transfer(sender, recipient, amount);
         return true;
     }
 
